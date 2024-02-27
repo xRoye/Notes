@@ -4,20 +4,12 @@
 Xi Roye 的 Notes
 
 #### 软件架构
-软件架构说明
+[Powered by docsify](https://docsify.js.org/#/zh-cn/)
 
+#### Pages
 
-#### 安装教程
+https://xi_roye.gitee.io/notes/#/
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
-#### 使用说明
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
 
 #### 参与贡献
 

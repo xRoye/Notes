@@ -36,10 +36,13 @@
 
 # About
 
-[Markdown Ref (from RUNOOB)](/markdown/Markdown_Reference.md)
+https://gitee.com/xi_roye/Notes
 
 [Powered by docsify](https://docsify.js.org/#/zh-cn/)
 
+<!-- 
+[Markdown Ref (from RUNOOB)](/markdown/Markdown_Reference.md)
 Device: Redmi Note 4 (mido)  
 OS: [Postmarket OS](https://postmarketos.org/) A real Linux distribution for phones  
-Author: Roye
+Author: Roye -->
+
