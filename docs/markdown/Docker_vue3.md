@@ -10,6 +10,17 @@ Ref. https://blog.csdn.net/weixin_57849570/article/details/132101497
 
 实际运行的指令其实写在 工程目录 package.json 的 scripts 组中
 
+如下所示，其中有 build 和 build:prod两种 (默认只有build:prod，build是自己加的)
+
+其中，使用build:prod会检查编码规范，报很多错误。~~但其实不影响运行~~（但其实最好还是按照规范编码），我们暂且先忽略掉它
+
+vue-tsc：Vue 官方提供的命令，用于执行 TS 的类型检查。它在执行时会根据项目中的 tsconfig.json 文件配置进行类型检查  
+--noEmit：TS 编译器的选项，使用 --noEmit 选项后，编译器仅执行类型检查，而不会生成任何实际的编译输出  
+————————————————
+版权声明：本文为博主原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接和本声明。  
+原文链接：https://blog.csdn.net/qq_38951259/article/details/131465897
+
+
 eg:
 ```
 "scripts": {
@@ -85,7 +96,7 @@ docker文件 在 Docker_vue 下创建一个 文件 Dockerfile
 
 -------------------
 
-default.conf ---- nginx的配置文件，这里只是一个例子
+default.conf ---- nginx的配置文件，这里给一个例子
 
 更详细的nginx配置值得单列一个主题编写
 
@@ -159,6 +170,6 @@ docker run：基于镜像启动一个容器
  
 -p 9090:80: 端口映射，将宿主机的9090端口映射到容器的80端口
  
---name：容器名，我起的叫test
+--name：容器名，我起的叫 my_docker_vue3
  
 xxxx：要启动的镜像名称

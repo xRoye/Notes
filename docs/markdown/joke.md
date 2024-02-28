@@ -55,13 +55,13 @@
 
 ----------
 
-![it works in my container](/img/v2-72b4f54812d46569beb66ec159ad795e_720w.webp)
+![it works in my container](../img/v2-72b4f54812d46569beb66ec159ad795e_720w.webp)
 
 -----------
 
-![why](/img/v2-9323a81c482d136fb5da7e1c6fb2c32a_720w.png)
+![why](../img/v2-9323a81c482d136fb5da7e1c6fb2c32a_720w.png)
 
 ---------------
 
-![address](/img/v2-d02bfb0761e988f5bf02e1e7f6e11f4f_720w.webp)
+![address](../img/v2-d02bfb0761e988f5bf02e1e7f6e11f4f_720w.webp)
 

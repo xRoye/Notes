@@ -8,7 +8,7 @@ Ref. https://www.cnblogs.com/iruxu/p/gitgui.html
 
 2. 操作流程：
 
-![Git](/img/271314500648180.png)
+![Git](../img/271314500648180.png)
 
 
 ## 初始化
@@ -17,12 +17,17 @@ Ref. https://www.cnblogs.com/iruxu/p/gitgui.html
 2. git服务器 设置 SSH key
 3. git GUI clone/create
 
+## 忽略原则
+
+在项目中新建一个 文件 .gitignore
+
+各种开发的ignore模板参考： https://github.com/github/gitignore
 
 ## 常用命令
 
 常用命令速查表
 
-![Git_cmd](/img/git_cmd.jpg)
+![Git_cmd](../img/git_cmd.jpg)
 
 常用命令
 

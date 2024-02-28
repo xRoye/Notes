@@ -66,6 +66,22 @@ runoob@runoob:~$ docker run -it nginx:latest /bin/bash
 root@b8573233d675:/# 
 ```
 
+进入容器
+```
+docker attach 容器ID
+或者
+docker exec -it 容器ID /bin/bash 
+或者
+docker exec -it 容器的name bash
+```
+
+退出容器
+```
+exit
+or
+Ctrl+P+Q
+```
+
 # Tips
 ## docker的设置
 

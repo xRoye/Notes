@@ -28,6 +28,8 @@
 
 ## 运维与杂项
 
+  * [Linux](/markdown/linux.md)
+
   * [DNS](/markdown/dns.md)
 
   * [ftp sftp](/markdown/ftp_sftp.md)
