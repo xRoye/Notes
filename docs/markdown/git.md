@@ -8,7 +8,7 @@ Ref. https://www.cnblogs.com/iruxu/p/gitgui.html
 
 2. 操作流程：
 
-![Git](../img/271314500648180.png)
+![Git](/img/271314500648180.png)
 
 
 ## 初始化
@@ -22,7 +22,7 @@ Ref. https://www.cnblogs.com/iruxu/p/gitgui.html
 
 常用命令速查表
 
-![Git_cmd](../img/git_cmd.jpg)
+![Git_cmd](/img/git_cmd.jpg)
 
 常用命令
 
