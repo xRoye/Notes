@@ -23,6 +23,30 @@ Ref. https://www.cnblogs.com/iruxu/p/gitgui.html
 
 各种开发的ignore模板参考： https://github.com/github/gitignore
 
+```
+# dir 不需要提交的目录
+/node_modules
+​
+# file 不需要提交的文件
+config.ini
+​
+# log 不需要提交的任意包含后缀名为log的文件
+*.log
+​
+# Package Files 不需要提交的任意包含后缀名为jar的文件
+*.jar
+```
+
+如果有些文件已经被忽略了，当使用git add时是无法添加的。需要加上-f参数才能强制添加到git中去，这样就能强制添加到缓存中去了。
+
+git add -f node_modules/jquery/dist/jquery.min.js
+
+如果我们意外的将想要忽略的文件添加到缓存中去了，我们可以使用rm命令将其从中移除：
+
+git rm --cached test.js 
+
+
+
 ## 常用命令
 
 常用命令速查表
