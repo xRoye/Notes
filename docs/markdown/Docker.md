@@ -82,8 +82,7 @@ or
 Ctrl+P+Q
 ```
 
-## Docker 离线导入导出
-
+# Docker 离线导入导出
 
 Ref. https://www.runoob.com/docker/docker-command-manual.html
 
@@ -92,7 +91,7 @@ Ref. https://www.runoob.com/docker/docker-command-manual.html
 Ref. https://www.hangge.com/blog/cache/detail_2411.html
 
 
-### 区别
+## 区别
 Ref.https://zhuanlan.zhihu.com/p/649896526
 
 Docker image 的两个主要命令 docker save 和 docker export 这两个命令看起来非常相似，但实际上它们的用途和行为是有所不同的。在本文中，我们将深入探讨 docker save 和 docker export 之间的差异，帮助你更好地使用 Docker。
@@ -135,9 +134,9 @@ docker export 命令会将当前正在运行的容器快照导出到一个.tar �
 
 需要记住的是，docker save 用于轻松迁移 Docker image 和备份 image 的元数据，而 docker export 用于快速备份单个容器。通过深入了解它们之间的差异，你将更好地理解如何使用这些命令来管理 Docker image 和容器。
 
-### save load
+## save load
 
-#### docker save : 将指定镜像保存成 tar 归档文件。
+### docker save : 将指定镜像保存成 tar 归档文件。
 
 语法  
 `docker save [OPTIONS] IMAGE [IMAGE...]`
@@ -151,7 +150,7 @@ runoob@runoob:~$ ll my_ubuntu_v3.tar
 -rw------- 1 runoob runoob 142102016 Jul 11 01:37 my_ubuntu_v3.ta
 ```
 
-#### docker load : 导入使用 docker save 命令导出的镜像。
+### docker load : 导入使用 docker save 命令导出的镜像。
 语法 `docker load [OPTIONS]`
 OPTIONS 说明：  
 --input , -i : 指定导入的文件，代替 STDIN。  
@@ -188,9 +187,9 @@ fedora              latest              58394af37342        7 weeks ago         
 ```
 
 
-### export  import
+## export  import
 
-#### docker export :将文件系统作为一个tar归档文件导出到STDOUT。
+### docker export :将文件系统作为一个tar归档文件导出到STDOUT。
 语法 `docker export [OPTIONS] CONTAINER`   
 -o :将输入内容写到文件。  
 eg.
@@ -201,7 +200,7 @@ mysql-20160711.tar
 
 ```
 
-#### docker import : 从归档文件中创建镜像。
+### docker import : 从归档文件中创建镜像。
 语法 `docker import [OPTIONS] file|URL|- [REPOSITORY[:TAG]]`  
 OPTIONS说明：  
 -c :应用docker 指令创建镜像；  
@@ -217,6 +216,110 @@ runoob/ubuntu       v4                  63ce4a6d6bc3        20 seconds ago      
 ```
 
 
+# Docker 网络配置
+
+Ref. https://zhuanlan.zhihu.com/p/258939355
+
+## 问题引出
+需要部署的项目中有数据库和 django，django需要连接到数据库容器的 3306 端口上，由于容器的 IP 地址会变化，又不能写死 IP 地址，所以就有了下文。
+
+##  docker 网卡介绍
+docker 安装好之后默认会创建三个虚拟网卡，可以使用 docker network ls 命令来查看，三个虚拟网卡和 VMware 的类似。
+```
+ b@ubuntu20:~$ docker network ls
+ NETWORK ID          NAME                DRIVER              SCOPE
+ 68633255abb2        bridge              bridge              local
+ adea9d9ae839        host                host                local
+ 517ed92475cc        none                null                local
+```
+bridge 是默认的网卡，网络驱动是 bridge 模式，类似于 Vmware 的 NAT 模式，如果容器启动时不指定网卡，则会默认连接到这块网卡上。如果需要访问容器内部的端口需要设置端口映射。  
+host 是直接使用主机的网络，网络驱动是 host 模式，类似于 Vmware 的桥接模式，可能会和主机的端口存在冲突，不需要设置端口映射即可连接到容器端口。  
+none 禁止所有联网，没有网络驱动，一般情况下用不到。  
+由于默认的网卡需要设置端口映射并且 IP 地址会随着容器的启动停止而变动，所以我们这里选择使用自定义网络来实现容器之间互相访问。
+
+
+
+## 创建自定义网络
+使用 `docker network create my-net` 命令来创建一个我们自定义的网络，网络驱动仍然使用 bridge。
+```
+ b@ubuntu20:~$ docker network create my-net
+ 2ee565af7c72d6d4e719471138224496e976d5ea5ee4d00681d597f09c0e6560
+ b@ubuntu20:~$ docker network ls
+ NETWORK ID          NAME                DRIVER              SCOPE
+ 68633255abb2        bridge              bridge              local
+ adea9d9ae839        host                host                local
+ 2ee565af7c72        my-net              bridge              local
+ 517ed92475cc        none                null                local
+```
+现在这个创建好的自定义网络就和默认的 bridge 网络隔离开了，互相之间不能访问，而且它们也不在同一个网段上。
+
+### 默认网络和自定义网络区别
+说到这里可能有人会问了，那默认的网卡的网卡驱动也是 bridge 模式的，用户自定义的网络也是 bridge 模式，不就是换了一个名字吗，为什么默认的网卡不可以使用别名进行 IP 地址解析呢？
+
+这个问题问得好，官方特意解释了这两个网卡的区别。
+```
+User-defined bridges provide automatic DNS resolution between containers.
+Containers on the default bridge network can only access each other by IP addresses, unless you use the --link option, which is considered legacy. On a user-defined bridge network, containers can resolve each other by name or alias.
+```
+翻译过来大意：就是用户自定义的网卡可以在容器之间提供自动的 DNS 解析，缺省的桥接网络上的容器只能通过 IP 地址互相访问，除非使用 --link 参数。在用户自定义的网卡上，容器直接可以通过名称或者别名相互解析。
+
+文档中提到了 --link 参数，官方文档中已经不推荐使用 --link 参数，并且最终可能会被删除，所以最好不要使用 --link 参数来连接两个容器，并且它有多个缺点。
+
+如果使用 --link 参数，需要在容器之间手动创建链接，这些链接需要双向创建，如果容器多于两个的话，将会很困难。或者也可以通过编辑 hosts 文件的方式来指定解析结果，但是这样将会非常难以调试。
+
+使用 `docker network inspect bridge` 命令查看默认网卡的详细信息。
+```
+ b@ubuntu20:~$ docker network inspect bridge 
+ [
+     {
+         "Name": "bridge",
+         "Id": "68633255abb265ef682c163b401a810fb66fd08d0cf23f863974e325ad82bbcf",
+         "Created": "2020-09-24T02:37:43.329713459Z",
+         "Scope": "local",
+         "Driver": "bridge",
+         "EnableIPv6": false,
+         "IPAM": {
+             "Driver": "default",
+             "Options": null,
+             "Config": [
+                 {
+                     "Subnet": "172.17.0.0/16",
+                     "Gateway": "172.17.0.1"
+                 }
+             ]
+         },
+         ...后面省略
+     }
+ ]
+```
+使用 `docker network inspect my-net` 命令查看自定义网卡的详细信息。
+```
+ b@ubuntu20:~$ docker network inspect my-net 
+ [
+     {
+         "Name": "my-net",
+         "Id": "2ee565af7c72d6d4e719471138224496e976d5ea5ee4d00681d597f09c0e6560",
+         "Created": "2020-09-24T07:43:14.684477356Z",
+         "Scope": "local",
+         "Driver": "bridge",
+         "EnableIPv6": false,
+         "IPAM": {
+             "Driver": "default",
+             "Options": {},
+             "Config": [
+                 {
+                     "Subnet": "172.18.0.0/16",
+                     "Gateway": "172.18.0.1"
+                 }
+             ]
+         },
+     ...后面省略
+     }
+ ]
+```
+对比一下可以看出，默认网卡处于 172.17.0.0/16 这个网段，自定义网卡顺延了一位，处于 172.18.0.0/16 这个网段，它们两个肯定是不可以互相通信的。
+### docker run 
+添加参数 --network my-net 
 
 # Tips
 ## docker的设置
@@ -308,6 +411,8 @@ nameserver 223.5.5.5 
 
 # 实例
 
-* [Docker 打包 vue3 项目](/markdown/Docker_vue3.md)
+* [Docker 打包 部署 vue3 项目](/markdown/Docker_vue3.md)
 
 * [Docker部署Django 之 单容器部署Django + Uwsgi](/markdown/Docker_django_uwsgi.md)
+
+* [Docker部署之 mysql](/markdown/Docker_mysql.md)

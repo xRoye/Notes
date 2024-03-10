@@ -162,7 +162,9 @@ eg
 
 `docker run --name [容器名] -p 9090:80 -d [镜像名]`
 
-`docker run --name my_docker_vue3 -p 9090:80 -d vue_docker_demo:latest`
+`docker run --name my_docker_vue3 -p 9090:80 -d vue_docker_demo:latest`  
+指定网卡：  
+`docker run --name my_docker_vue3 -p 9090:80 --network my-net -d vue_docker_demo:latest`
 
 docker run：基于镜像启动一个容器
  

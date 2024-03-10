@@ -10,11 +10,17 @@
 
   * [Nginx](/markdown/nginx.md)
 
-## Windows 技巧
+## 运维与杂项
 
-  * [WSL Windows Subsystem for Linux](/markdown/WSL.md)
+  * [Linux](/markdown/linux.md)
 
-  * [家庭版开启远程桌面 Remote Desktop Protocol](/markdown/RDP.md)
+  * [IP](/markdown/ip.md)
+
+  * [DNS](/markdown/dns.md)
+
+  * [ftp sftp](/markdown/ftp_sftp.md)
+
+  * [it's just a joke](/markdown/joke.md)  
 
 ## 科学上网
 
@@ -22,19 +28,16 @@
 
   * [哈工大网络资源一览](/markdown/hit-network-resources.md)
 
+## Windows 技巧
+
+  * [WSL Windows Subsystem for Linux](/markdown/WSL.md)
+
+  * [家庭版开启远程桌面 Remote Desktop Protocol](/markdown/RDP.md)
+
 ## 刷机
 
   * [Postmarket_OS](/markdown/Postmarket_OS.md)
 
-## 运维与杂项
-
-  * [Linux](/markdown/linux.md)
-
-  * [DNS](/markdown/dns.md)
-
-  * [ftp sftp](/markdown/ftp_sftp.md)
-
-  * [it's just a joke](/markdown/joke.md)  
 
 # About
 

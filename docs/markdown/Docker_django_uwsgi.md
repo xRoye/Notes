@@ -129,11 +129,14 @@ pip源设置成了阿里云镜像，pip.conf文件内容如下所示：
 
 单容器部署 Django + UWSGI
 
-1. 生成名为django_uwsgi_img:v1的镜像  
-    `sudo docker build -t django_uwsgi_img:v1 .`
+1. 生成名为django_uwsgi_img的镜像 注意 在有dockerbuild的目录下执行，注意最后的 "." 别丢了  
+    `sudo docker build -t django_uwsgi_img .`
 
-2. 启动并运行mysite2的容器  宿主机80：容器8000。-d表示后台运行
-    `sudo docker run -it -d --name mysite2 -p 80:8000 django_uwsgi_img:v1`
+2. 启动并运行mysite2的容器  宿主机80：容器8000。-d表示后台运行  
+    `docker run -it -d --name django-test -p 80:8000 django_uwsgi_img`  
+    指定网卡启动  
+    `docker run -it -d --name django --network my-net -p 80:8000 django_uwsgi_img`  
+    关于网卡配置参考 [Docker-网络配置](/markdown/Docker.md#docker-网络配置)
 
 3. 进入mysite2的容器内部，并运行脚本命令start.sh  
     进入容器，如果复制命令的话，结尾千万不能有空格。  
@@ -146,7 +149,9 @@ pip源设置成了阿里云镜像，pip.conf文件内容如下所示：
 执行后效果如下所示。当你看到最后一句\[uWSGI\]时，说明uwsgi配置并启动完成。
 
 
-这时你打开浏览器输入http://your_server_ip，你就可以看到你的Django网站已经上线了，恭喜你！这次是uwsgi启动的服务哦，因为你根本没输入python manage.py runserver命令。
+这时你打开浏览器输入http://your_server_ip，你就可以看到你的Django网站已经上线了
+
+恭喜你！这次是uwsgi启动的服务哦，因为你根本没输入python manage.py runserver命令。
 
 
 其实上述过程可以配置成docker启动执行，摘录如下
@@ -174,12 +179,16 @@ docker run  -itd --name test --restart=always amd64/ubuntu:18.04 /bin/bash /1.sh
 此时如果你没有看到网站上线，主要有两个可能原因：
 
 1. uwsgi配置文件错误。  
-尤其http服务IP地址为0.0.0.0:8000，不应是服务器的ip:8000，因为我们uwsgi在容器里，并不在服务器上。
-
+尤其http服务IP地址为0.0.0.0:8000，不应是服务器的ip:8000，因为我们uwsgi在容器里，并不在服务器上。  
+参见  [IP 0.0.0.0 与 localhost](/markdown/ip.md#localhost127001和0000和本机ip的区别)
 2. 浏览器设置了http(端口80)到https(端口443)自动跳转。  
 因为容器8000端口映射的是宿主机80端口，如果请求来自宿主机的443端口，容器将接收不到外部请求。  
 解决方案清空浏览器设置缓存或换个浏览器。
 
+3. 访问数据库异常。  
+settings.py 中 数据库配置HOST 如果数据库不在同一个容器中，不能使用 localhost，可根据数据库容器ip配置，也可用主机的ip地址，总之注意是HOST的问题
+但是这样相当不优雅，因为ip会变，可以通过创建自定义网络，并直接通过容器名称访问 ~~【并在容器启动时指定ip实现（docker默认网络不能指定ip）这个比起名称还是略显麻烦了】~~   
+参见  [Docker-网络配置](/markdown/Docker.md#docker-网络配置)
 
 注意：你会留意到网站虽然上线了，但有些图片和网页样式显示不对，这是因为uwsgi是处理动态请求的服务器，静态文件请求需要交给更专业的服务器比如Nginx处理。
 
