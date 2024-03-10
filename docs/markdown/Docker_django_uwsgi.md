@@ -129,7 +129,7 @@ pip源设置成了阿里云镜像，pip.conf文件内容如下所示：
 
 单容器部署 Django + UWSGI
 
-1. 生成名为django_uwsgi_img的镜像 注意 在有dockerbuild的目录下执行，注意最后的 "." 别丢了  
+1. 生成名为django_uwsgi_img的镜像 注意 在工程目录下(有Dockerfile的目录下)执行，注意最后的 "." 别丢了  
     `sudo docker build -t django_uwsgi_img .`
 
 2. 启动并运行mysite2的容器  宿主机80：容器8000。-d表示后台运行  
