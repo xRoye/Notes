@@ -132,10 +132,10 @@ pip源设置成了阿里云镜像，pip.conf文件内容如下所示：
 1. 生成名为django_uwsgi_img的镜像 注意 在工程目录下(有Dockerfile的目录下)执行，注意最后的 "." 别丢了  
     `sudo docker build -t django_uwsgi_img .`
 
-2. 启动并运行mysite2的容器  宿主机80：容器8000。-d表示后台运行  
-    `docker run -it -d --name django-test -p 80:8000 django_uwsgi_img`  
+2. 启动并运行mysite2的容器  宿主机8000：容器8000。-d表示后台运行  
+    `docker run -it -d --name django-test -p 8000:8000 django_uwsgi_img`  
     指定网卡启动  
-    `docker run -it -d --name django --network my-net -p 80:8000 django_uwsgi_img`  
+    `docker run -it -d --name django --network my-net -p 8000:8000 django_uwsgi_img`  
     关于网卡配置参考 [Docker-网络配置](/markdown/Docker.md#docker-网络配置)
 
 3. 进入mysite2的容器内部，并运行脚本命令start.sh  
@@ -149,7 +149,9 @@ pip源设置成了阿里云镜像，pip.conf文件内容如下所示：
 执行后效果如下所示。当你看到最后一句\[uWSGI\]时，说明uwsgi配置并启动完成。
 
 
-这时你打开浏览器输入http://your_server_ip，你就可以看到你的Django网站已经上线了
+这时你打开浏览器输入  
+http://your_server_ip  
+你就可以看到你的Django网站已经上线了  
 
 恭喜你！这次是uwsgi启动的服务哦，因为你根本没输入python manage.py runserver命令。
 
