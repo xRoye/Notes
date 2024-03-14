@@ -156,6 +156,13 @@ eg
 
 注意事项：-t 后输入给镜像取的名称，最后的点 （.） 不要忘记，代表给利用当前 dockerfile 构建镜像
 
+#### mock 打包问题
+Ref.  
+https://zhuanlan.zhihu.com/p/595206548  
+https://juejin.cn/post/6996176490148659231/  
+https://www.itcan.cn/2024/01/23/vite-plugin-mock3/  
+https://juejin.cn/post/7135282172738404365
+
 ### 启动
 
 内部80端口 映射 外部9090
@@ -175,3 +182,14 @@ docker run：基于镜像启动一个容器
 --name：容器名，我起的叫 my_docker_vue3
  
 xxxx：要启动的镜像名称
+
+#### 启动遇到问题 
+```
+docker: Error response from daemon: Ports are not available: exposing port TCP 0.0.0.0:9090 -> 0.0.0.0:0: listen tcp 0.0.0.0:9090: bind: An attempt was made to access a socket in a way forbidden by its access permissions.
+```
+
+先看是不是端口真的占用了如果没有,而且是windows,重启NAT网络就可以解决
+```
+net stop winnat
+net start winnat
+```
