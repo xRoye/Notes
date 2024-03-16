@@ -22,12 +22,21 @@
       //设置自动生成目录的最大层级
       subMaxLevel: 5,
       //加载自定义导航栏，默认加载的文件为 _navbar.md
-      // loadNavbar: true,
+      loadNavbar: true,
+      //根目录
+      basePath: '/',
       //启用相对路径
-      relativePath: true
+      relativePath: true,
+      //自动跳转顶部
+      auto2top: true,
+      name: 'Roye\'s Lite Note',
+      //点击侧栏的二级标题之后，页面的标题不会距离顶部太近
+      topMargin: 40,
     }
   </script>
   <script src="./docsify/lib/docsify.min.js"></script>
   <!-- <script src="//cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script> -->
+  <script src="./docsify/lib/docsify-copy-code.min.js"></script>
+  <!-- <script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script> -->
 </body>
 </html>

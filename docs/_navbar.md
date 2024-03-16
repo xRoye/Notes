@@ -1,1 +1,2 @@
-* [回到首页](/README.md)
+* [首页](/)
+* [![Gitee](/img/gitee.logo-white.png ':size=20')](https://gitee.com/xi_roye/Notes)

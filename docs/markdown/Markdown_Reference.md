@@ -156,7 +156,7 @@ $(document).ready(function () {
 
 ![alt 属性文本](图片地址 "可选标题")  
 ![RUNOOB 图标](https://static.jyshare.com/images/runoob-logo.png)  
-
+[![加了链接的 RUNOOB 图标](https://static.jyshare.com/images/runoob-logo.png)  ](http://runoob.com)
 指定宽度可用img标签  
 <img src="https://static.jyshare.com/images/runoob-logo.png" width="50%">
 
