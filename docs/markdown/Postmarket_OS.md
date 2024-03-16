@@ -370,3 +370,59 @@ table inet filter {
 }
 ```
 终于搞定FTP
+
+
+# Samba
+
+Ref. https://zhuanlan.zhihu.com/p/375925918
+
+## 安装
+```
+sudo apk add samba
+
+sudo service samba start #开启samba 服务
+sudo rc-update add samba # 开机启动samba 服务
+
+sudo service vsftpd restart
+
+```
+## 配置
+
+`sudo nano /etc/samba/smb.conf`
+```
+#1.全局部分参数设置：
+[global]
+        #与主机名相关的设置
+        workgroup = zkhouse  <==工作组名称
+        netbios name = zkserver   <==主机名称，跟hostname不是一个概念，在同一个组中，netbios name必须唯一
+        serverstring = this is a test samba server <==说明性文字，内容无关紧要
+        #与登录文件有关的设置
+        log file = /var/log/samba/log.%m   <==日志文件的存储文件名，%m代表的是client端Internet主机名，就是hostname
+        max log size = 50      <==日志文件最大的大小为50Kb
+        #与密码相关的设置
+        security = share       <==表示不需要密码，可设置的值为share、user和server
+        passdb backend = tdbsam
+        #打印机加载方式
+        load printer = no <==不加载打印机
+-----------------------------------------------------------
+#2.共享资源设置方面：将旧的注释掉，加入新的
+#先取消[homes]、[printers]的项目，添加[temp]项目如下
+[temp]              <==共享资源名称
+        comment = Temporary file space <==简单的解释，内容无关紧要
+        path = /tmp     <==实际的共享目录
+        writable = yes    <==设置为可写入
+        browseable = yes   <==可以被所有用户浏览到资源名称，
+        guest ok = yes    <==可以让用户随意登录
+```
+
+Linux的用户密码和samba的用户密码并不是一码子事，只是samba的用户必须是Linux的用户，因此需要将smbuser这个账户添加到samba的用户数据库，否则无法访问共享目录，执行如下命令:
+
+pwd 147147
+```
+sudo smbpasswd -a user
+New SMB password:
+Retype new SMB password:
+Added user user.
+```
+
+重启服务

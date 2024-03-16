@@ -158,10 +158,53 @@ eg
 
 #### mock 打包问题
 Ref.  
+https://cn.vitejs.dev/config/server-options
 https://zhuanlan.zhihu.com/p/595206548  
 https://juejin.cn/post/6996176490148659231/  
 https://www.itcan.cn/2024/01/23/vite-plugin-mock3/  
 https://juejin.cn/post/7135282172738404365
+
+vite.config.ts
+```
+viteMockServe({
+        ignore: /^\_/,
+        mockPath: "mock",
+        localEnabled: true,
+        // 是否在生产环境使用Mock
+        prodEnabled: true,
+        // 用来动态控制生产环境是否开启Mock，通过动态添加代码到Main.ts中来实现
+        // 如果直接把代码写到文件中，就会始终打包
+        injectCode: `
+       import { setupProdMockServer } from '../mock/_createMockServer';
+       setupProdMockServer();`
+      }),
+```
+
+mock/_createMockServer.ts
+```
+import { createProdMockServer } from 'vite-plugin-mock/es/createProdMockServer';
+
+//  const modules = import.meta.globEager('./*.ts');
+const modules = import.meta.glob('./*.ts', { eager: true,import:'default' })
+const mockModules: any[] = [];
+Object.keys(modules).forEach((key) => {
+  if (key.includes('/_')) {
+    return;
+  }
+  //mockModules.push(...modules[key].default);
+  const mod = modules[key] || {}
+  const modlist = Array.isArray(mod)?[...mod]:[mod]
+  mockModules.push(...modlist)
+});
+
+/**
+ * 在生产环境中使用。 需要手动导入所有模块
+ */
+export function setupProdMockServer() {
+  createProdMockServer(mockModules);
+}
+
+```
 
 ### 启动
 

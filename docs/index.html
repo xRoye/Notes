@@ -8,10 +8,23 @@
   <!-- <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/themes/vue.css"> -->
 </head>
 <body>
+  <!--<nav>
+    <a href="#/">首页</a>
+     <a href="#/zh-cn/">中文</a>
+  </nav>-->
   <div id="app"></div>
   <script>
     window.$docsify = {
       //...
+      //在 ./docs 目录创建 .nojekyll 命名的空文件，阻止 GitHub Pages 忽略命名是下划线开头的文件
+      // 加载自定义侧边栏 加载 _sidebar.md
+      loadSidebar: true,
+      //设置自动生成目录的最大层级
+      subMaxLevel: 5,
+      //加载自定义导航栏，默认加载的文件为 _navbar.md
+      // loadNavbar: true,
+      //启用相对路径
+      relativePath: true
     }
   </script>
   <script src="./docsify/lib/docsify.min.js"></script>
