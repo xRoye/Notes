@@ -74,6 +74,29 @@ conda命令行：
 
 `conda config --set show_channel_urls yes`
 
+配置文件在 C:\Users\<username>\.condarc
+自用配置参考
+```
+channels:
+  - defaults
+show_channel_urls: true
+default_channels:
+  - https://mirrors.hit.edu.cn/anaconda/pkgs/main
+  - https://mirrors.hit.edu.cn/anaconda/pkgs/r
+  - https://mirrors.hit.edu.cn/anaconda/pkgs/msys2
+custom_channels:
+  conda-forge: https://mirrors.hit.edu.cn/anaconda/cloud
+  msys2: https://mirrors.hit.edu.cn/anaconda/cloud
+  bioconda: https://mirrors.hit.edu.cn/anaconda/cloud
+  menpo: https://mirrors.hit.edu.cn/anaconda/cloud
+  pytorch: https://mirrors.hit.edu.cn/anaconda/cloud
+  pytorch-lts: https://mirrors.hit.edu.cn/anaconda/cloud
+  simpleitk: https://mirrors.hit.edu.cn/anaconda/cloud
+
+envs_dirs:
+  - D://ProgramData//anaconda3//envs
+```
+
 ### linux:
 
 将以上配置文件写在~/.condarc中 vim ~/.condarc
@@ -91,6 +114,31 @@ conda命令行：
 `conda config --remove channels https://mirrors.cloud.tencent.com/anaconda/pkgs/pro/`
 
 
+### Python pip 配置
+顺便贴个自用python配置  
+C:\Users\<username>\pip\pip.ini
+```
+[global]
+index-url = https://mirrors.hit.edu.cn/pypi/web/simple/
+; extra-index-url =
+;     https://mirrors.cernet.edu.cn/pypi/web/simple
+;     https://mirrors.aliyun.com/pypi/simple/
+;     https://pypi.tuna.tsinghua.edu.cn/simple/
+;     https://pypi.douban.com/simple/
+;     https://pypi.mirrors.ustc.edu.cn/simple/
+;     https://pypi.org/simple/
+
+[install]
+trusted-host =
+    mirrors.cernet.edu.cn
+    mirrors.hit.edu.cn
+    pypi.tuna.tsinghua.edu.cn
+    mirrors.aliyun.com
+    pypi.douban.com
+    pypi.mirrors.ustc.edu.cn
+    pypi.org
+
+```
 
 ## 示例
 

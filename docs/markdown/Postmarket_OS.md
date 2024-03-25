@@ -295,8 +295,8 @@ allow_writeable_chroot=YES #500 OOPS chroot错误的解决方法
 ```
 ## 注意，sshd自带一个sftp，我把sftp关了
 
-
-# 防火墙 nftables
+ 
+# 防火墙 nftables —— 以FTP配置为例
 
 现有教程基本都是讲iptables 极少有讲nftables配置的
 
@@ -426,3 +426,38 @@ Added user user.
 ```
 
 重启服务
+
+## 防火墙 nftables
+
+Samba端口说明
+Samba服务所使用的端口和协议： 
+
+1）Port 137 (UDP) - NetBIOS 名字服务 ； nmbd  
+2）Port 138 (UDP) - NetBIOS 数据报服务  
+3）Port 139 (TCP) - 文件和打印共享 ； smbd （基于SMB(Server Message Block)协议，主要在局域网中使用，文件共享协议）  
+4）Port 389 (TCP) - 用于 LDAP (Active Directory Mode)  
+5）Port 445 (TCP) - NetBIOS服务在windos 2000及以后版本使用此端口, (Common Internet File System，CIFS，它是SMB协议扩展到Internet后，实现Internet文件共享)  
+6）Port 901 (TCP) - 用于 SWAT，用于网页管理Samba    
+
+这里直接把相关端口全开放了
+```
+/etc/nftables.d$ sudo touch samba.nft
+/etc/nftables.d$ sudo nano samba.nft
+```
+
+samba.nft
+```
+table inet filter {
+        chain input {
+            tcp dport { 137-139,389,445,901 } accept comment "Accept Samba"
+        }
+        chain output{
+            tcp dport { 137-139,389,445,901 } accept comment "Accept Samba"
+        }
+}
+
+```
+
+`/etc/nftables.d$ sudo service nftables restart`
+
+搞定
