@@ -98,6 +98,8 @@ docker文件 在 Docker_vue 下创建一个 文件 Dockerfile
 
 default.conf ---- nginx的配置文件，这里给一个例子
 
+其中尤其需要注意的是，如果前后端分离部署，需要对api配置proxy，否则会报405
+
 更详细的nginx配置值得单列一个主题编写
 
 ```
@@ -111,6 +113,10 @@ server {
         try_files $uri $uri/ /index.html =404;
     }
  
+    location /api/{
+    proxy_pass http://django:8000/api/;
+    }
+
     error_page   500 502 503 504  /50x.html;
     location = /50x.html {
         root   html;

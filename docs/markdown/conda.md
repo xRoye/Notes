@@ -74,7 +74,7 @@ conda命令行：
 
 `conda config --set show_channel_urls yes`
 
-配置文件在 C:\Users\<username>\.condarc
+配置文件在 C:\Users\username\\.condarc
 自用配置参考
 ```
 channels:
@@ -116,7 +116,7 @@ envs_dirs:
 
 ### Python pip 配置
 顺便贴个自用python配置  
-C:\Users\<username>\pip\pip.ini
+C:\Users\username\pip\pip.ini
 ```
 [global]
 index-url = https://mirrors.hit.edu.cn/pypi/web/simple/
