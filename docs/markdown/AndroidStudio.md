@@ -66,6 +66,9 @@ Android Studio卡prepareKotlinBuildScriptModel解决方法
 
 # Android 开发
 
+## developer android google reference
+Ref. https://developer.android.google.cn/reference
+
 ## Android平台下的cpu利用率优化实现
 Ref. https://juejin.cn/post/7243240618788388922
 

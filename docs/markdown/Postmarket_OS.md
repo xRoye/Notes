@@ -1,10 +1,16 @@
-# Ref
+# Introduction
 
+## Related Works & Ref
 [PostmarketOS官方安装说明 Redmi2为例](https://wiki.postmarketos.org/wiki/Xiaomi_Redmi_2_(xiaomi-wt88047))  
 
 [红米2 安装Linux: postmarketOS(基于Alpine)及后续玩法](https://www.bilibili.com/read/cv17390817)
 
-主要根据上述两篇进行记录与补充。重点在于参考文献[2]中，安装docker后启动失败问题的处理
+## Main contribution
+根据上述两篇进行记录与补充。  
+重点贡献在于参考文献[2]中，安装docker后启动失败问题的处理
+
+同样投稿在bilibili专栏  
+[红米2 安装Linux: postmarketOS 以及docker启动失败的解决方法](https://www.bilibili.com/read/cv29866221)
 
 
 # Install
