@@ -15,8 +15,14 @@ Ref. https://www.runoob.com/docker/docker-install-mysql.html
 
 `docker run -itd --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 mysql`
 
-指定网卡，指定hostname，数据持久化：  
+指定网卡，指定hostname，数据持久化： (最好在本地提前创建好持久化对应目录)
+
+windows：  
+`docker run -itd --name mysql -p 3306:3306 --network my-net -v D:\Learn\Docker\mysql\data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 mysql`
+
+linux：  
 `docker run -itd --name mysql -p 3306:3306 --network my-net -v /home/workspace/docker-mysql/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 mysql`
+
 
 关于网卡配置参考 [Docker-网络配置](/markdown/Docker.md#docker-网络配置)
 
