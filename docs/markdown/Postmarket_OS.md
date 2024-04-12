@@ -467,3 +467,21 @@ table inet filter {
 `/etc/nftables.d$ sudo service nftables restart`
 
 搞定
+
+# 开机启动脚本
+/etc/local.d
+
+eg.
+```
+xiaomi-mido:/etc/local.d$ ls -l
+total 12
+-rwxr-xr-x    1 root     root           499 Dec  1 18:50 99-shutdown-pbsplash.stop
+-rw-r--r--    1 root     root           652 Jan 11 21:43 README
+-rwxr-xr-x    1 root     root            72 Feb 22 14:05 py_httpserver.start
+xiaomi-mido:/etc/local.d$
+xiaomi-mido:/etc/local.d$ cat py_httpserver.start
+cd /home/ftpuser/Docsify/Notes/docs
+nohup python3 -m http.server 8899 &
+xiaomi-mido:/etc/local.d$
+
+```
