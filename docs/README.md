@@ -16,7 +16,7 @@
 
   * [Linux](/markdown/linux.md)
 
-  * [IP](/markdown/ip.md)
+  * [OSI 与 TCP/IP](/markdown/ip.md)
 
   * [DNS](/markdown/dns.md)
 

@@ -18,6 +18,9 @@ Django、Uwsgi、Nginx相关基础知识
 
 2. Django默认ALLOWED_HOSTS = []为空，在正式部署前你需要修改settings.py, 把它设置为服务器实际对外IP地址，否则后面部署会出现错误，这个与docker无关。即使你不用docker部署，ALLOWED_HOSTS也要设置好的。
 
+3. 自用  requirements 加 uwsgi==2.0.24
+
+4. 自用 settings.py 改数据库信息
 ## 构建环境准备
 项目结构如下(mysite2为例)
 ```
@@ -79,10 +82,12 @@ start.sh脚本文件内容如下所示。最重要的是最后一句，使用uws
  # 1. 生成数据库迁移文件
  # 2. 根据数据库迁移文件来修改数据库
  # 3. 用 uwsgi启动 django 服务, 不再使用python manage.py runserver
+ # 4. 持续打印log, 避免自动退出
  python manage.py makemigrations&&
  python manage.py migrate&&
- uwsgi --ini /var/www/html/mysite2/uwsgi.ini
+ uwsgi --ini /var/www/html/djangoProject02/uwsgi.ini
  # python manage.py runserver 0.0.0.0:8000
+ tail -f /tmp/djangoProject02-uwsgi.log
 ```
 
 
@@ -170,9 +175,15 @@ http://your_server_ip
 
 docker run  -itd --name test --restart=always amd64/ubuntu:18.04 /bin/bash /1.sh;/2.sh;/3.sh
 
+本项目例子：
+`docker run -it -d --name django --network my-net -p 8000:8000 django_uwsgi_img /bin/bash /var/www/html/djangoProject02/start.sh`
+
+注意，在sh执行完毕后，docker会自动退出  
+解决方法为，在启动脚本最后加一句持续打印日志的 `tail -f xxxx.log`
+
+
 ————————————————
-版权声明：本文为博主原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接和本声明。  
-原文链接：https://blog.csdn.net/weixin_38693938/article/details/115214293
+ref. https://blog.csdn.net/weixin_38693938/article/details/115214293
 
 
 

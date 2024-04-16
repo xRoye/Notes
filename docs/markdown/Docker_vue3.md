@@ -162,13 +162,18 @@ eg
 
 注意事项：-t 后输入给镜像取的名称，最后的点 （.） 不要忘记，代表给利用当前 dockerfile 构建镜像
 
-#### mock 打包问题
+### mock 打包问题
 Ref.  
-https://cn.vitejs.dev/config/server-options
+https://cn.vitejs.dev/config/server-options  
 https://zhuanlan.zhihu.com/p/595206548  
 https://juejin.cn/post/6996176490148659231/  
 https://www.itcan.cn/2024/01/23/vite-plugin-mock3/  
-https://juejin.cn/post/7135282172738404365
+https://juejin.cn/post/7135282172738404365  
+https://blog.csdn.net/lhkuxia/article/details/125271405  
+
+ 
+> https://www.itcan.cn/2024/01/23/vite-plugin-mock3/
+
 
 vite.config.ts
 ```
