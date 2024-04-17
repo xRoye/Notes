@@ -1,4 +1,4 @@
-# Roye's Lite Note
+<!-- # Roye's Lite Note
 
 ## 入门到入土
 
@@ -42,11 +42,11 @@
 
 
 # About
-
+ -->
 <!-- Synchronizing Time : 2024-03-10 -->
-Email: xi.roye@qq.com
+<!-- Email: xi.roye@qq.com
 
-[Powered by docsify](https://docsify.js.org/#/zh-cn/)
+[Powered by docsify](https://docsify.js.org/#/zh-cn/) -->
 
 <!-- 
 https://gitee.com/xi_roye/Notes
@@ -56,3 +56,30 @@ Device: Redmi Note 4 (mido)
 OS: [Postmarket OS](https://postmarketos.org/) A real Linux distribution for phones  
 Author: Roye -->
 
+
+
+## Roye's Lite Note
+
+一个Roye自己的在线笔记
+
+## 内容
+
+* 内容包括但不限于：一时兴起的科普、一分钟入门扫盲，以及项目从环境搭建到开发流程的记录等  希望能够便捷地反复观摩并与大家分享的内容。
+
+* 网络上搜集来的资料，均添加了Ref 以便索引到原网页进行查看，尊重原作者版权
+
+## 联系
+
+* 加入我(们)，成为本文档的贡献者和维护者！
+* Gitee: https://gitee.com/xi_roye/Notes (或者右上角)
+* Email: xi.roye@qq.com 
+ 
+
+## 支持
+
+* 加入我(们)，成为本文档的贡献者和维护者！
+* 如果你觉得 本文档 对你有帮助，或者想对我微小的工作一点资瓷，欢迎给我 [投喂零食](/markdown/donate.md)
+
+## 关于
+网站由 [Gitee Pages](https://gitee.com/help/articles/4136) 服务托管  
+[Powered by docsify](https://docsify.js.org/#/zh-cn/)
