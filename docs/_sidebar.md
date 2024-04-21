@@ -1,7 +1,7 @@
 <!-- old_version -->
 <!-- * [目录](.) -->
 
-* Roye's Lite Note
+* Roye's Note
 
 * 入门到入土
 

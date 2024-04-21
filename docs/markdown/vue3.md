@@ -1,8 +1,12 @@
-# Vue3 
+## Vue3 
 
-## mock 打包问题
-Ref.  
-https://zhuanlan.zhihu.com/p/595206548  
-https://juejin.cn/post/6996176490148659231/  
-https://www.itcan.cn/2024/01/23/vite-plugin-mock3/  
-https://juejin.cn/post/7135282172738404365
+
+## 先顺手写一个nvm配置
+```
+node_mirror: https://npmmirror.com/mirrors/node/
+npm_mirror: https://npmmirror.com/mirrors/npm/
+```
+
+## axios 的使用 进阶
+https://blog.csdn.net/m0_61692295/article/details/127820418
+
