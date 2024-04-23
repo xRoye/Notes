@@ -1,5 +1,9 @@
 # 适用于 Windows 家庭版 开启远程桌面 Remote Desktop Protocol
 
+## 前排提醒
+当前 Android移动端 RD客户端 在连接的时候不要点 “不再询问” 字样的复选框  
+否则会在第二次连接的时候一直转圈进不去的bug，（需要清数据）
+
 ## 防火墙 —— 入站规则
 https://zhuanlan.zhihu.com/p/600706130
 
@@ -45,7 +49,7 @@ RDP 微软账号登录问题 https://zhuanlan.zhihu.com/p/600623397
 设置 - 账户 - 登陆选项 - 为了提高安全性，仅允许对此设备上的Microsoft账户使用Windows Hello登录  把这个关闭 
 然后就能使用微软账号和密码登录了（微软账号的密码，不是pin）
 
-## ipv6可用
+## ipv6 概率可用
 ref. https://zhuanlan.zhihu.com/p/627542501
 
 1. 先保证ipv4下RDP可用
