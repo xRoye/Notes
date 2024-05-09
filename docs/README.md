@@ -71,7 +71,7 @@ Author: Roye -->
 ## 联系
 
 * 加入我(们)，成为本文档的贡献者和维护者！
-* ~~ Gitee:https://gitee.com/xi_roye/Notes ~~
+* ~~Gitee:https://gitee.com/xi_roye/Notes~~
 * Github: https://github.com/xRoye/Notes (或者右上角)
 * Email: xi.roye@qq.com 
  
