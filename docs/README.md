@@ -71,7 +71,8 @@ Author: Roye -->
 ## 联系
 
 * 加入我(们)，成为本文档的贡献者和维护者！
-* Gitee: https://gitee.com/xi_roye/Notes (或者右上角)
+~~* Gitee: https://gitee.com/xi_roye/Notes ~~
+* Github: https://github.com/xRoye/Notes (或者右上角)
 * Email: xi.roye@qq.com 
  
 
@@ -81,5 +82,6 @@ Author: Roye -->
 * 如果你觉得 本文档 对你有帮助，或者想对我微小的工作一点资瓷，欢迎给我 [投喂零食](/markdown/donate.md)
 
 ## 关于
-网站由 [Gitee Pages](https://gitee.com/help/articles/4136) 服务托管  
+~~网站由 [Gitee Pages](https://gitee.com/help/articles/4136) 服务托管~~
+网站由 [Github Pages](https://pages.github.com/) 服务托管
 [Powered by docsify](https://docsify.js.org/#/zh-cn/)

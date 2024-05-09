@@ -8,7 +8,6 @@ Xi Roye 的 Notes
 
 #### Pages
 
-https://xi_roye.gitee.io/notes/#/
-https://github.com/xRoye/Notes
+https://xroye.github.io/Notes/#/
 
 

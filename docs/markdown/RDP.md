@@ -56,3 +56,25 @@ ref. https://zhuanlan.zhihu.com/p/627542501
 2. 路由器开启ipv6功能
 3. CMD `ipconfig` 查看 临时ipv6地址，就是这个地址应该可以连RDP了
 4. 或者去这个网站 https://ipw.cn/ 查一下是不是全绿且ipv6优先，而且ipv6地址应该和上一步是一样的
+
+## 提升远程桌面帧率
+ref. https://learn.microsoft.com/zh-cn/troubleshoot/windows-server/remote/frame-rate-limited-to-30-fps
+
+远程帧率的桌面默认限制在30帧，可以通过注册表修改提升到60FPS，大幅提升流畅度
+
+注意，经过实测官网的说法并不靠谱= =
+
+1. 通过快捷键WIN+R打开运行窗口，输入regedit，打开注册表编辑器
+2. 找到HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations
+3. 右键新建，选择DWORD(32-bit),输入文件名:DWMFRAMEINTERVAL
+4. 输入 十进制 16 （这里和官方给的说法完全不一样= =）
+    + 实际上写的就是帧生成时间，在testufo里能看到帧生成时间和在这写的保持一致，1000ms/帧率 = 帧生成时间， 1000ms/帧生成时间 = 帧率，
+    + 60fps--16.66ms 实测16会跑到  62fps
+    + 17ms--58.8fps
+    + 16ms--62.5fps
+    + 75fps--13.33ms
+    + 90fps--11.11ms
+    + 120fps--8.33ms
+5. 修改完~~需要重启~~关了远程重新连接基本就生效了，实在不行再重启试试
+6. 测试网站：https://testufo.com/
+7. 但是实际上在win11上能看rdp帧率，上面无论怎么设置，最终传输帧率还是30~40帧 = =
