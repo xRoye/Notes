@@ -36,8 +36,11 @@ https://github.com/stascorp/rdpwrap/releases
 4、右键以管理员身份运行RDPCheck.exe，出现远程桌面登录界面则表示安装正常。
 
 二、问题以及解决方法
-1、运行RDPConf.exeWrapped state和Service state都正常，但是Listener State显示not Listening 【not supported】
-C:\Program Files\RDP Wrapper\rdpwrap.ini 里面有个链接，手动打开链接，copy内容到该文件中，保存后，手动重启服务
+1、运行RDPConf.exeWrapped state和Service state都正常，但是Listener State显示not Listening 【not supported】  
+C:\Program Files\RDP Wrapper\rdpwrap.ini 里面有个链接，手动打开链接，copy内容到该文件中，  
+没有的话，在这里：https://raw.gitmirror.com/sebaxakerhtc/rdpwrap.ini/master/rdpwrap.ini  
+或者访问这位作者的github看看：https://github.com/sebaxakerhtc/rdpwrap.ini  
+保存后，手动重启服务  
 ```
 net stop termservice
 net start termservice
