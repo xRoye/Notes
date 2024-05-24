@@ -27,6 +27,8 @@
 
     * [it's just a joke](/markdown/joke.md)  
 
+    * [摄影 景深](/markdown/photography.md)
+
 * 科学上网
 
     * [github 520](/markdown/github520.md)
