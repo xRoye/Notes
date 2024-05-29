@@ -299,9 +299,20 @@ userlist_deny=NO #只能user_list文件中的用户访问ftp
 
 allow_writeable_chroot=YES #500 OOPS chroot错误的解决方法
 ```
-## 注意，sshd自带一个sftp，我把sftp关了
+### 注意，sshd自带一个sftp，我把sftp关了
+`sudo nano /etc/ssh/sshd_config`
 
- 
+把 Subsystem sftp xxxxx注释掉
+
+```
+# override default of no subsystems
+#Subsystem sftp xxxxx
+```
+
+然后重启服务
+
+`sudo service sshd restart`
+
 # 防火墙 nftables —— 以FTP配置为例
 
 现有教程基本都是讲iptables 极少有讲nftables配置的

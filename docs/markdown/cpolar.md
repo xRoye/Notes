@@ -1,7 +1,8 @@
 # cpolar 内网穿透
 
-https://www.cpolar.com/
-https://dashboard.cpolar.com/status
+https://www.cpolar.com/  
+https://dashboard.cpolar.com/status  
+https://www.cpolar.com/docs  
 
 ## Docker 部署
 
@@ -18,6 +19,8 @@ cpolar authtoken 复制的token #进官网登陆，左侧有验证选项，复�
 cpolar http 8081 # 穿透8081端口
 cpolar http 8899
 cpolar http 9200
+
+cpolar tcp 22 # tcp穿透22端口
 ```
 
 ### 启动指令分解
