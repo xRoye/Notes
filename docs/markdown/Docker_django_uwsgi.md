@@ -18,7 +18,8 @@ Django、Uwsgi、Nginx相关基础知识
 
 2. Django默认ALLOWED_HOSTS = []为空，在正式部署前你需要修改settings.py, 把它设置为服务器实际对外IP地址，否则后面部署会出现错误，这个与docker无关。即使你不用docker部署，ALLOWED_HOSTS也要设置好的。
 
-3. 自用  requirements 加 uwsgi==2.0.24
+3. 自用  requirements 加 uwsgi==2.0.24  
+    - 另外提一嘴，数据库相关加个 cryptography==42.0.8 稳妥一些 
 
 4. 自用 settings.py 改数据库信息
 ## 构建环境准备
