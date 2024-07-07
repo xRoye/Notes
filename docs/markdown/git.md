@@ -55,6 +55,7 @@ git rm --cached test.js
 以clash for windows为例，在首页第一个信息就是端口，以8888为例，于是在 git bash执行：  
 `git config --global http.proxy http://127.0.0.1:8888`  
 `git config --global https.proxy http://127.0.0.1:8888`  
+但是需要注意的是，在增加这个之后，没有代理的情况下进行git就会报错了，把git代理配置取消就行了
 
 以上两个结合，就可以愉快的 git clone 了
 
