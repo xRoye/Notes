@@ -21,6 +21,8 @@
 
     * [OSI 与 TCP/IP](/markdown/ip.md)
 
+    * [DDNS 与 虚拟局域网代理](/markdown/DDNS.md)
+
     * [DNS](/markdown/dns.md)
 
     * [ftp sftp](/markdown/ftp_sftp.md)
