@@ -213,3 +213,20 @@ settings.py 中 数据库配置HOST 如果数据库不在同一个容器中，�
 [Docker完美部署Django Uwsgi+Nginx+MySQL+Redis](https://zhuanlan.zhihu.com/p/145364353)
 
 [Docker部署Django](https://pythondjango.cn/django/advanced/16-docker-deployment/)
+
+
+## 如何让Django 的app migration重新与数据库同步
+Ref. 原文出处未知 转载参考 https://cloud.tencent.com/developer/article/1469374 
+1. 清除迁移历史记录  
+`python manage.py migrate --fake app_name zero`
+
+2. 查看当前的migration进度，此时文件前的 [x] 变成了[ ]  
+`python manage.py showmigrations app_name`
+
+3. 删除app-migrations下除__init__.py的其他文件
+
+4. 执行makemigrations，程序会再次为这个app 生成 0001_initial.py 文件  
+`python manage.py makemigrations app_name`
+
+5. 把当前数据库的状态作为初始状态  
+`python manage.py migrate --fake-initial app_name`
