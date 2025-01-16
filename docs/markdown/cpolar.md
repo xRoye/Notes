@@ -34,10 +34,11 @@ docker网络
 docker network ls
 结果应如下
 
-NETWORK ID          NAME                DRIVER              SCOPE
-594430d2d4bb        bridge              bridge              local
-d855b34c5d51        host                host                local
-b1ecee29ed5e        none                null                local
+|NETWORK ID | NAME         |       DRIVER          |    SCOPE
+| ---- | ---- |  ----  | ---- |
+594430d2d4bb     |   bridge         |     bridge        |      local
+d855b34c5d51      |  host           |     host          |      local
+b1ecee29ed5e     |   none           |     null          |      loca 
 Docker内置这三个网络，运行容器时，你可以使用该来指定容器应连接到哪些网络。
 
 我们在使用docker run创建Docker容器时，可以用--network标志 选项指定容器的网络模式，Docker有以下4种网络模式：

@@ -15,9 +15,7 @@
 
     * [Android](/markdown/AndroidStudio.md)
 
-* 运维与杂项
-
-    * [Linux](/markdown/linux.md)
+* 网络工程
 
     * [OSI 与 TCP/IP](/markdown/ip.md)
 
@@ -25,11 +23,11 @@
 
     * [DNS](/markdown/dns.md)
 
+* 系统运维
+
+    * [Linux](/markdown/linux.md)
+
     * [ftp sftp](/markdown/ftp_sftp.md)
-
-    * [it's just a joke](/markdown/joke.md)  
-
-    * [摄影 景深](/markdown/photography.md)
 
 * 科学上网
 
@@ -46,6 +44,13 @@
 * 刷机
 
     * [Postmarket_OS](/markdown/Postmarket_OS.md)
+    * [Termux](/markdown/termux.md)
+
+* 杂项
+
+    * [it's just a joke](/markdown/joke.md)  
+
+    * [摄影 景深](/markdown/photography.md)
 
 * About
 
