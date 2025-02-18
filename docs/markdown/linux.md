@@ -30,7 +30,7 @@ netstat -tunlp | grep 端口号
 ```
 kill -9 PID
 ```
-## 权限
+## 权限 chmod
 
 ```
 语法
@@ -76,3 +76,63 @@ find path/ -type d -exec chmod a+x {} \;	允许所有用户浏览或通过目录
 
 shell关闭而进程不死  
 `nohup ./test.sh &`
+
+## chroot 与 proot
+
+#### chroot(change root)
+ref. https://www.cnblogs.com/sparkdev/p/8556075.html
+chroot，即 change root directory (更改 root 目录)。在 linux 系统中，系统默认的目录结构都是以 /，即以根 (root) 开始的。而在使用 chroot 之后，系统的目录结构将以指定的位置作为 / 位置。
+
+##### 基本语法
+chroot NEWROOT [COMMAND [ARG]...]
+
+
+##### 为什么要使用 chroot 命令
+1. 增加了系统的安全性，限制了用户的权力：
+在经过 chroot 之后，在新根下将访问不到旧系统的根目录结构和文件，这样就增强了系统的安全性。一般会在用户登录前应用 chroot，把用户的访问能力控制在一定的范围之内。
+
+2. 建立一个与原系统隔离的系统目录结构，方便用户的开发：
+使用 chroot 后，系统读取的是新根下的目录和文件，这是一个与原系统根下文件不相关的目录结构。在这个新的环境中，可以用来测试软件的静态编译以及一些与系统不相关的独立开发。
+
+3. 切换系统的根目录位置，引导 Linux 系统启动以及急救系统等：
+chroot 的作用就是切换系统的根位置，而这个作用最为明显的是在系统初始引导磁盘的处理过程中使用，从初始 RAM 磁盘 (initrd) 切换系统的根位置并执行真正的 init。
+
+#### proot 
+ref. https://proot-me.github.io/
+ref. https://juejin.cn/post/7197337416096038967
+
+PRoot 是 chroot、mount --bind 和 binfmt_misc 的用户态实现。用户不需要拥有系统特权就可以在任意目录建立一个新的根文件系统。从而在建立的根文件系统内做任何事情。也可以借助QEMU user-mode甚至能够运行其他CPU构架的程序。
+从技术上来说，PRoot是依靠ptrace机制实现的。ptrace允许程序在没有拿到系统特权（root）时，父进程观察并修改子进程的系统调用，这也是PRoot的核心原理。本文主要也是分析这一机制。
+
+
+##  glibc 和 libc
+ref. https://blog.csdn.net/yasi_xi/article/details/9899599
+glibc 和 libc 都是 Linux 下的 C 函数库。 
+libc 是 Linux 下的 ANSI C 函数库；glibc 是 Linux 下的 GUN C 函数库。 
+
+##### ANSI C 和 GNU C 有什么区别呢？ 
+
+ANSI C 函数库是基本的 C 语言函数库，包含了 C 语言最基本的库函数。这个库可以根据头文件划分为 15 个部分，其中包括： 
+1. <ctype.h>：包含用来测试某个特征字符的函数的函数原型，以及用来转换大小写字母的函数原型；
+2. <errno.h>：定义用来报告错误条件的宏；
+3. <float.h>：包含系统的浮点数大小限制；
+4. <math.h>：包含数学库函数的函数原型；
+5. <stddef.h>：包含执行某些计算 C 所用的常见的函数定义；
+6. <stdio.h>：包含标准输入输出库函数的函数原型，以及他们所用的信息；
+7. <stdlib.h>：包含数字转换到文本，以及文本转换到数字的函数原型，还有内存分配、随机数字以及其他实用函数的函数原型；
+8. <string.h>：包含字符串处理函数的函数原型；
+9. <time.h>：包含时间和日期操作的函数原型和类型；
+10. <stdarg.h>：包含函数原型和宏，用于处理未知数值和类型的函数的参数列表；
+11. <signal.h>：包含函数原型和宏，用于处理程序执行期间可能出现的各种条件；
+12. <setjmp.h>：包含可以绕过一般函数调用并返回序列的函数的原型，即非局部跳转；
+13. <locale.h>：包含函数原型和其他信息，使程序可以针对所运行的地区进行修改。地区的表示方法可以使计算机系统处理不同的数据表达约定，如全世界的日期、时间、美元数和大数字；
+14. <assert.h>：包含宏和信息，用于进行诊断，帮助程序调试。
+15. <limits.h>：定义了各种数据类型的极限值。这些极限值是通过宏定义的，它们为整数类型（如char、short、int、long和long long）以及其他数据类型提供了最大值和最小值的信息。
+
+上述库函数在其各种支持 C 语言的 IDE 中都是有的。  
+
+GNU C 函数库是一种类似于第三方插件的东西。由于 Linux 是用 C 语言写的，所以 Linux 的一些操作是用 C 语言实现的，因此，GUN 组织开发了一个 C 语言的库   以便让我们更好的利用 C 语言开发基于 Linux 操作系统的程序。 不过现在的不同的 Linux 的发行版本对这两个函数库有不同的处理方法，有的可能已经集成在同一个库里了。  
+
+
+glibc是linux下面c标准库的实现，即GNU C Library。glibc本身是GNU旗下的C标准库，后来逐渐成为了Linux的标准c库，而Linux下原来的标准c库Linux libc逐渐不再被维护。Linux下面的标准c库不仅有这一个，如uclibc、klibc，以及上面被提到的Linux libc，但是glibc无疑是用得最多的。glibc在/lib目录下的.so文件为libc.so.6。
+

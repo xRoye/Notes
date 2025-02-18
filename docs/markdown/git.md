@@ -52,11 +52,16 @@ git rm --cached test.js
 2.  关于代理加速：Ref.https://blog.csdn.net/weixin_74027669/article/details/139383679  
 对于Git克隆命令（例如`git clone`），它是使用Git协议进行通信的，而不是使用常见的HTTP或HTTPS协议。Git协议使用的是自己的网络端口（默认为9418），而不是HTTP（端口80）或HTTPS（端口443）。  
 这时候就要改变Git本身的配置，让git的默认端口号和你代理服务器的监听端口号一样。  
-以clash for windows为例，在首页第一个信息就是端口，以8888为例，于是在 git bash执行：  
-`git config --global http.proxy http://127.0.0.1:8888`  
-`git config --global https.proxy http://127.0.0.1:8888`  
+以clash for windows为例，在首页第一个信息就是端口，以7890为例，于是在 git bash执行：  
+```
+git config --global http.proxy http://127.0.0.1:7890
+git config --global https.proxy http://127.0.0.1:7890
+```
 但是需要注意的是，在增加这个之后，没有代理的情况下进行git就会报错了，把git代理配置取消就行了
-
+```
+git config --global --unset http.proxy
+git config --global --unset https.proxy
+```
 以上两个结合，就可以愉快的 git clone 了
 
 ## 常用命令

@@ -44,3 +44,5 @@ You can now start code server by simply running `code-server`.
 `nano /data/data/com.termux/files/home/.config/code-server/config.yaml`  
 
 
+### Android 下的pc模拟器
+ref. https://www.bilibili.com/opus/824360204451708945
