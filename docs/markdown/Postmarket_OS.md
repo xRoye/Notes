@@ -32,7 +32,7 @@ up没有挂梯子，在androidfilehost 下载失败，虽然有点费事，但�
 
 刷入lk2nd指令如下：  
 ```
-fastboot flash boot lk2nd-msm8916.img
+fastboot flash lk2nd lk2nd-msm8916.img
 fastboot reboot
 ```
 没遇到问题 
