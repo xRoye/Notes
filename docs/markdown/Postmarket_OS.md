@@ -30,6 +30,7 @@ up没有挂梯子，在androidfilehost 下载失败，虽然有点费事，但�
 
 在上面链接下载最新的 lk2nd-msm8916.img 
 
+（实际上有些lk2nd 需要使用在postmarketos下载页面的定制包，建议还是都使用定制包比较好）
 刷入lk2nd指令如下：  
 ```
 fastboot flash lk2nd lk2nd-msm8916.img
@@ -41,7 +42,7 @@ fastboot reboot
 
 在 <https://postmarketos.org/download/> 选择Redmi2最新稳定版下载
 
-下载提供了多个桌面版本，每个版本都有xxx.img.xz 和 -boot.img.xz两个压缩包，可以通过指令unxz解压，windows环境可以直接使用压缩软件打开解压得到两个 .img文件
+下载提供了多个桌面版本，每个版本都有xxx.img.xz 和 -boot.img.xz两个压缩包，（以及定制的 lk2nd 包）可以通过指令unxz解压，windows环境可以直接使用压缩软件打开解压得到两个 .img文件
 
 第一次安装的gnome版本，异常卡顿，完全没法用（v23.12），改成phosh就正常了
 
@@ -59,6 +60,17 @@ fastboot erase system
 
 fastboot reboot
 ```
+
+## 系统更新 Upgrade to a newer postmarketOS release
+
+```
+sudo apk add postmarketos-release-upgrade
+sudo apk update
+sudo apk upgrade
+sudo postmarketos-release-upgrade
+```
+
+需要注意，在系统版本变化时，需要对应更改源repositories里对应的版本号
 
 # 安装后
 ## Login
@@ -86,6 +98,27 @@ ssh user@ip
 
 根据自己的版本添加源，建议把原来的直接开头加#注释掉
 
+eg.
+```
+https://mirrors.cernet.edu.cn/postmarketOS/v24.06
+https://mirrors.cernet.edu.cn/alpine/v3.21/main
+https://mirrors.cernet.edu.cn/alpine/v3.21/community
+```
+需要注意，在使用系统的自带
+
+## 添加中文
+
+安装中文字体
+```
+sudo apk add font-noto-cjk
+```
+
+可选设置系统语言为中文
+```
+sudo nano /etc/profile
+文件末尾添加 export LANG=zh_CN.UTF-8
+```
+
 ### vi 使用参考
 ```
 按i进行编辑
@@ -99,6 +132,42 @@ sudo apk update #更新软件包信息
 sudo apk upgrade #更新软件
 
 更新完最好重启一下 sudo reboot
+```
+
+## flatpak
+
+24.xx版 自带 flatpak，如需安装，`sudo apk add flatpak`
+
+如果你使用GNOME桌面环境，安装flatpak支持插件(实际上已经有了)：
+`sudo apt install gnome-software-plugin-flatpak`
+
+```
+查看flatpak仓库的详细信息
+flatpak remotes --show-details
+
+官方源
+flatpak remote-modify flathub --url=https://dl.flathub.org/repo
+
+改国内源
+flatpak remote-modify flathub --url=https://mirrors.cernet.edu.cn/flathub
+
+flatpak search 应用名
+flatpak install applicationID eg.  flatpak install org.chromium.Chromium
+列出已安装应用：
+#所有
+flatpak list
+#仅应用，不含运行时
+flatpak list --app
+#仅运行时
+flatpak list --runtime
+更新所有应用：
+flatpak update
+
+卸载应用程序：
+卸载时保留用户数据
+flatpak uninstall com.spotify.Client
+卸载的删除用户数据
+flatpak uninstall com.spotify.Client --delete-data
 ```
 
 ## 安装docker
@@ -228,6 +297,9 @@ sudo docker run -d  --name portainer -p 9000:9000 -v /var/run/docker.sock:/var/
 nameserver 223.5.5.5 
 
 ## Phosh: How to permanently set display scaling
+
+https://wiki.postmarketos.org/wiki/Phosh
+
 Display scaling will revert back to default after reset on Phosh-based OSs such as Mobian, PostmarketOS Phosh, ect.
 
 To make changes permanent the reference configuration needs to be copied to /etc/phosh/ with the scaling for the Pinephone’s display set as desired.
@@ -236,8 +308,18 @@ Instructions:
 ```
 sudo mkdir /etc/phosh/
 sudo cp /usr/share/phosh/phoc.ini /etc/phosh/
+
+Find the name of your screen output device in :
+ls /sys/class/drm
+
+eg: 这个实际上就是card0 的 DSI-1 后面的output保持不变
+`
+$ ls /sys/class/drm
+card0        card0-DSI-1  renderD128   version
+`
+
 sudo vi /etc/phosh/phoc.ini
-\# Uncomment the DSI-1 output section:
+\# Uncomment the DSI-1 output section: replace DSI-1 with the output name you found earlier
 \[output:DSI-1\]
 scale = 2
 \# Change scale to desired value (ex: scale = 1.5 means 150%)
@@ -496,3 +578,19 @@ nohup python3 -m http.server 8899 &
 xiaomi-mido:/etc/local.d$
 
 ```
+
+# chromium 不清晰 以及启动时会卡死一会儿
+
+## 不清晰（分辨率低）
+ref.原文链接：https://blog.csdn.net/gianttj/article/details/140997293
+解决了ubuntu在高清屏上 chromium，vscode、腾迅QQ等Electron应用界面dpi低，界面模糊的问题
+
+说明：
+系统是ubuntu24.04，用firefox dpi正常，界面和文字都很细腻，用chrome,chromium,edge就很模糊，网上一大片的都是说字体问题，但并不是这个问题，是chrome 分辨率的问题，今天就分享一下。
+
+在chrome,chromium地址栏输入chrome://flags/
+我的gnome登录是基于Wayland session的，点击设置按钮，选Auto或Wayland，重启浏览器，界面、图片和文字就能在高清屏上正常显示了。
+
+## 启动卡死
+关闭图形加速：  
+设置 - 系统 - 使用图形加速功能（如果可用）  （use graphics acceleration）
