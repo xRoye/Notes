@@ -119,11 +119,12 @@ envs_dirs:
 C:\Users\username\pip\pip.ini
 ```
 [global]
-index-url = https://mirrors.hit.edu.cn/pypi/web/simple/
-; extra-index-url =
+index-url = 
+; extra-index-url = https://mirrors.cernet.edu.cn/pypi/web/simple
 ;     https://mirrors.cernet.edu.cn/pypi/web/simple
 ;     https://mirrors.aliyun.com/pypi/simple/
 ;     https://pypi.tuna.tsinghua.edu.cn/simple/
+;     https://mirrors.hit.edu.cn/pypi/web/simple/
 ;     https://pypi.douban.com/simple/
 ;     https://pypi.mirrors.ustc.edu.cn/simple/
 ;     https://pypi.org/simple/
