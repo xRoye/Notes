@@ -30,6 +30,8 @@ netstat -tunlp | grep 端口号
 ```
 kill -9 PID
 ```
+
+
 ## 权限
 
 ```

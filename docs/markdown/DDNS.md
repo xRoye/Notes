@@ -10,11 +10,15 @@
 -   ZEROTIER：https://my.zerotier.com/ 在单纯的远控需求下，极佳！可以打通P2P通道，走UDP传输，不经过第三方转发。在打不通的情况下，中心服务器在国外，会很慢。可玩性极高
 
 ## 相关知识
-TCP/IP系列
-路由系列
-静态路由表
-NAT系列
-代理系列
+TCP/IP系列  
+路由系列  
+静态路由表  
+网桥  
+NAT  
+代理  
+
+## zerotier L2 网桥
+https://docs.zerotier.com/bridging/
 
 ## 流量转发的Windows配置
 
