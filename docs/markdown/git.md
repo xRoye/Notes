@@ -161,3 +161,23 @@ git gc
 git fsck
 
 ```
+
+
+# git 同时使用 GitHub Gitee 等
+
+未验证。。。
+
+1. ~~创建多个密钥 ssh-keygen -t rsa -C "邮箱"，或者用GUI （都用同一个密钥的话，似乎也不是不行？）  id_rsa  id_rsa.pub 放 C:\Users\<username>\.ssh目录下~~
+2. ~~移除全局配置~~
+```
+git config --global --list
+~~git config --global --unset user.name "你的名字"~~
+~~git config --global --unset user.email "你的邮箱"
+```
+~~
+3. ~~项目git配置~~
+```
+git init
+git config --local user.name "你的名字"
+git config --local user.email "你的邮箱"
+```
